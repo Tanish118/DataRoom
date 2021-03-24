@@ -1,49 +1,99 @@
-﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <title>ST3 Mini Project</title>
+    <link rel="stylesheet" href="index.css">
+    
 </head>
 <body>
-    <script type="text/javascript">
-        var data = new Array();
+    <script>
 
-        function add_element() {
-            data.push(document.getElementById('t1').value);
-            document.getElementById('t1').value = '';
-            data.push(document.getElementById('t2').value);
-            document.getElementById('t2').value = '';
-            data.push(document.getElementById('t3').value);
-            document.getElementById('t3').value = '';
-            disp();
-        }
-        function remove_element(index_no) {
-            var t1 = data.splice(index_no, 1);
-            disp();
-        }
-        function disp() {
-            var str = '';
-            str = 'User Database : ' + '<br>';
-            for (i = 0; i < data.length; i++) {
-                str += data[i] + " ";
-                
+        function CreateUser() {
+            //Variables access
+            var table = document.getElementById("result_table");
+            var Name = document.getElementById("Name").value;
+            var mob_no = document.getElementById("mob_no").value;
+            var email = document.getElementById("email").value;
+
+            if (Name == "" || mob_no == "" || email == "") {
+                alert("Fields Empty !! ReEnter Data!!");
             }
-            str+=" <a href=# onClick='remove_element(" + data.indexOf(data[i]) + ")'> Remove</a> " + "<br >"
-            document.getElementById('disp').innerHTML = str;
+            else {                
+                var first = document.createElement("TR");
+                var td = document.createElement("TD");
+                var ele = document.createTextNode(Name);
+                td.appendChild(ele);
+                first.appendChild(td);
+
+                var fr = document.createElement("TD");
+                var user = document.createTextNode(mob_no);
+                fr.appendChild(user);
+                first.appendChild(fr);
+
+                var e3 = document.createElement("TD");
+                var u2 = document.createTextNode(email);
+                e3.appendChild(u2);
+                first.appendChild(e3);
+
+                var c = document.createElement("TD");
+                var delet = document.createElement("Button");
+                var btn = document.createTextNode("Delete")
+                delet.appendChild(btn);
+                delet.setAttribute("onclick", "delete_user()");
+                c.appendChild(delet);
+
+                first.appendChild(c);
+
+                table.appendChild(first);
+            }
+
+
         }
+
+        function delete_user() {
+
+            var td_d = event.target.parentNode;
+            var tr_D = td_d.parentNode;
+            tr_D.parentNode.removeChild(tr_D);
+
+        }
+
+
     </script>
-    <div><center>
-    <h3>Details Form</h3>
-    <span>Name</span>
-    <input type=text id='t1' required><br />
-    <span>Contact</span>
-    <input type=text id='t2' required><br />
-    <span>Email</span>
-    <input type=text id='t3' required>
-    <br>
-    <input type=button value='submit' onClick='add_element()' ;>
-    <div id=disp></div>
-</center> </div>
+
+    <div id="form">
+        <h2><p >Details form</p></h2>
+
+        <div >
+            <ul type ="None">
+                <li>
+                    <label for="name">Name:</label>
+                    <input type="text" id="Name" name="name" minlength="3">
+                </li>
+                <li>
+                    <label for="mail">E-mail:</label>
+                    <input type="email" id="email" name="email">
+                </li>
+                <li>
+                    <label for="Contact">Contact</label>
+                    <input type="text" id="mob_no" name="mob_no" minlength="10">
+                </li>
+                <li><input type="submit" value="Submit" onclick="CreateUser()"></li>
+            </ul>
+        </div>
+
+
+        <hr>
+        <div id="result_div">
+            <table id="result_table">
+                <tr>
+                    <td>Name:</td>
+                    <td>Mob No:</td>
+                    <td>Email:</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
