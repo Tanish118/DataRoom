@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        var data = new Array();
+
+        function add_element() {
+            data.push(document.getElementById('t1').value);
+            document.getElementById('t1').value = '';
+            data.push(document.getElementById('t2').value);
+            document.getElementById('t2').value = '';
+            data.push(document.getElementById('t3').value);
+            document.getElementById('t3').value = '';
+            disp();
+        }
+        function remove_element(index_no) {
+            var t1 = data.splice(index_no, 1);
+            disp();
+        }
+        function disp() {
+            var str = '';
+            str = 'User Database : ' + '<br>';
+            for (i = 0; i < data.length; i++) {
+                str += data[i] + " ";
+                
+            }
+            str+=" <a href=# onClick='remove_element(" + data.indexOf(data[i]) + ")'> Remove</a> " + "<br >"
+            document.getElementById('disp').innerHTML = str;
+        }
+    </script>
+    <div><center>
+    <h3>Details Form</h3>
+    <span>Name</span>
+    <input type=text id='t1' required><br />
+    <span>Contact</span>
+    <input type=text id='t2' required><br />
+    <span>Email</span>
+    <input type=text id='t3' required>
+    <br>
+    <input type=button value='submit' onClick='add_element()' ;>
+    <div id=disp></div>
+</center> </div>
+</body>
+</html>
